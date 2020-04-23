@@ -45,7 +45,7 @@
 // Explanation 1
 // Because all of the first  letters of the infinite string are a, we print  on a new line.
 
-
+// slow version
 function repeatedString(s, n) {
     let ix1 = 0;
     let ix2 = 1;
@@ -73,4 +73,36 @@ function repeatedString(s, n) {
     }
     
     return count
+}
+
+// fast version
+function repeatedString(s, n) {
+    let lcount = 0;
+    let tcount = 0;
+    let xcount = 0;
+    if (s.length==1) {
+        if (s[0]=="a") {
+           return n; 
+        } else {
+            return 0;
+        }
+        
+    } else {
+        for (let i=0; i<s.length; i++) {
+            if (s[i]=="a"){
+                lcount++;
+            }      
+        }
+        if (n%s.length==0) {
+            tcount=(n/s.length)*lcount
+        } else {
+            for (let j=0; j<n%s.length; j++) {
+                if (s[j]=="a"){
+                    xcount++;
+                } 
+                tcount=(Math.floor(n/s.length)*lcount)+xcount
+            }
+        }
+    }
+    return tcount
 }
